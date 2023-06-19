@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ticket_project_back.Data;
 using ticket_project_back.Data.Services;
 
@@ -15,7 +16,10 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ticket-project webAPI", Version = "v2" });
 });
-builder.Services.AddDbContext<TicketDbContext>();
+builder.Services.AddDbContext<TicketDbContext>( options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"));
+});
 
 var app = builder.Build();
 
@@ -24,6 +28,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ticket-project-back v2"));
+    builder.Configuration.AddUserSecrets<Program>();
 }
 
 app.UseHttpsRedirection();

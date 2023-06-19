@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ticket_project_back</RootNamespace>
+    <UserSecretsId>36d4fc4c-a707-436b-b31c-ee4f8532ee39</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
