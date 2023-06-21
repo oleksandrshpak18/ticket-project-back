@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.Text;
+using ticket_project_back.Data.Interfaces;
 using ticket_project_back.Data.Models;
-using ticket_project_back.Data.Models.Interfaces;
 using ticket_project_back.Data.ViewModels;
 
 namespace ticket_project_back.Data.Services

@@ -31,7 +31,7 @@ namespace ticket_project_back.Controllers
             }
             else
             {
-                return Ok(_service.getByPhone(phone));
+                return Ok(res);
             }
         }
     }
