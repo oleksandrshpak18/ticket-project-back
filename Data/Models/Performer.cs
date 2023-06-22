@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace ticket_project_back.Data.Models;
@@ -22,7 +23,7 @@ public partial class Performer
     public DateTime? UpdateDate { get; set; }
 
     public string? Img { get; set; }
-
+    
     public virtual Country? Country { get; set; }
 
     public virtual ICollection<Event> Events { get; set; } = new List<Event>();

@@ -19,6 +19,7 @@ namespace ticket_project_back.Controllers
         public IActionResult GetAll()
         {
             return Ok(_service.GetAll());
+            //return Ok(_service.Get());
         }
         [HttpGet("get-by-id")]
         public IActionResult GetById([FromQuery] int id)

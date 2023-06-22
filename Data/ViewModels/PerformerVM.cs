@@ -16,7 +16,6 @@ namespace ticket_project_back.Data.ViewModels
 
         public virtual string? Country { get; set; }
         public virtual List<string> PerformerGenres { get; set; } = new List<string>();
-
         public virtual string? PerformerType { get; set; }
     }
 }

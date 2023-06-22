@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using ticket_project_back.Data;
 using ticket_project_back.Data.Services;
 
@@ -7,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+    //.AddJsonOptions(options =>
+    //{
+    //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    //});
 
 builder.Services.AddTransient<CustomerService>();
 builder.Services.AddTransient<PerformerService>();
