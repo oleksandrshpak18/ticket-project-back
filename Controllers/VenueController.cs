@@ -25,7 +25,7 @@ namespace ticket_project_back.Controllers
             var res = _service.GetById(id);
             if (res == null)
             {
-                return BadRequest($"Performer with id {id} does not exist.");
+                return BadRequest($"Venue with id {id} does not exist.");
             }
             else
             {
@@ -52,7 +52,21 @@ namespace ticket_project_back.Controllers
             var res = _service.updateImage(id, imageUrl);
             if (res == null)
             {
-                return BadRequest($"Performer with id {id} does not exist.");
+                return BadRequest($"Venue with id {id} does not exist.");
+            }
+            else
+            {
+                return Ok(res);
+            }
+        }
+
+        [HttpPut("update-description")]
+        public IActionResult UpdateDescription([FromQuery] int id, [FromBody] string descr)
+        {
+            var res = _service.updateDescription(id, descr);
+            if (res == null)
+            {
+                return BadRequest($"Venue with id {id} does not exist.");
             }
             else
             {

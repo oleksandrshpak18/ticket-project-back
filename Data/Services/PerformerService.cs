@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ticket_project_back.Data.Services
 {
-    public class PerformerService : IGet<PerformerVM, Performer>, IUpdateImage<PerformerVM>
+    public class PerformerService : IGet<PerformerVM, Performer>, IUpdateImage<PerformerVM>, IUpdateDescription<PerformerVM>
     {
         private TicketDbContext _context;
         public PerformerService(TicketDbContext context)
@@ -85,6 +85,17 @@ namespace ticket_project_back.Data.Services
             if(_performer != null)
             {
                 _performer.Img = imageUrl;
+                _context.SaveChanges();
+            }
+            return ConvertToVm(_performer);
+        }
+
+        public PerformerVM updateDescription(int id, string newDescr)
+        {
+            var _performer = _context.Performers.FirstOrDefault(n => n.PerformerId == id);
+            if (_performer != null)
+            {
+                _performer.Description = newDescr;
                 _context.SaveChanges();
             }
             return ConvertToVm(_performer);

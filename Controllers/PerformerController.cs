@@ -61,5 +61,19 @@ namespace ticket_project_back.Controllers
             }
         }
 
+        [HttpPut("update-description")]
+        public IActionResult UpdateDescription([FromQuery] int id, [FromBody] string descr)
+        {
+            var res = _service.updateDescription(id, descr);
+            if (res == null)
+            {
+                return BadRequest($"Performer with id {id} does not exist.");
+            }
+            else
+            {
+                return Ok(res);
+            }
+        }
+
     }
 }

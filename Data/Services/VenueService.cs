@@ -6,7 +6,7 @@ using ticket_project_back.Data.ViewModels;
 
 namespace ticket_project_back.Data.Services
 {
-    public class VenueService : IGet<VenueVM, Venue>, IUpdateImage<VenueVM>
+    public class VenueService : IGet<VenueVM, Venue>, IUpdateImage<VenueVM>, IUpdateDescription<VenueVM>
     {
         private TicketDbContext _context;
         public VenueService(TicketDbContext context)
@@ -89,6 +89,17 @@ namespace ticket_project_back.Data.Services
                         (x.Description != null && x.Description.Contains(keyword)));
 
             return res.Select(x => ConvertToVm(x));
+        }
+
+        public VenueVM updateDescription(int id, string newDescr)
+        {
+            var _venue = _context.Venues.FirstOrDefault(n => n.VenueId == id);
+            if (_venue != null)
+            {
+                _venue.Description = newDescr;
+                _context.SaveChanges();
+            }
+            return ConvertToVm(_venue);
         }
 
         public VenueVM updateImage(int id, string imageUrl)
