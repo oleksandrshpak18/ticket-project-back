@@ -7,12 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-    //.AddJsonOptions(options =>
-    //{
-    //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-    //});
+builder.Services.AddCors(options => options.AddPolicy("corspolicy", policy =>
+{
+   policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
 
+builder.Services.AddControllers();
+    
 builder.Services.AddTransient<CustomerService>();
 builder.Services.AddTransient<PerformerService>();
 
@@ -38,6 +39,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("corspolicy");
 
 app.UseAuthorization();
 
