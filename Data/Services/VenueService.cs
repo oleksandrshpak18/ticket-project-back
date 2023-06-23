@@ -62,7 +62,6 @@ namespace ticket_project_back.Data.Services
                     Img = v.Img,
                     CreateDate = v.CreateDate,
                     UpdateDate = v.UpdateDate,
-                    //VenueZones = v.VenueZones
                     VenueZones = (ICollection<VenueZone>)v.VenueZones
                         .Select(n => new VenueZone 
                         { 
@@ -71,8 +70,6 @@ namespace ticket_project_back.Data.Services
                             SeatsPerRowCount = n.SeatsPerRowCount
                         }
                     )
-                    //PerformerGenres = (ICollection<PerformerGenre>)p.PerformerGenres.Select(n => new PerformerGenre { Genre = n.Genre }),
-
                 }).ToList();
         }
 

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
+
 using ticket_project_back.Data;
 using ticket_project_back.Data.Services;
 
@@ -17,6 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddTransient<CustomerService>();
 builder.Services.AddTransient<PerformerService>();
 builder.Services.AddTransient<VenueService>();
+builder.Services.AddTransient<EventService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
