@@ -75,7 +75,7 @@ namespace ticket_project_back.Data.Services
             var res = GetWithRelations()
                 .Where(x => x.Title.ToLower().Contains(lowercaseKeyWord)||
                         (x.Description != null && x.Description.Contains(keyword)));
-            //Console.WriteLine(res);
+            
             return res.Select(x => ConvertToVm(x));
         }
 
