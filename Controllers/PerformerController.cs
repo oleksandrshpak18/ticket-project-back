@@ -37,7 +37,15 @@ namespace ticket_project_back.Controllers
         [HttpGet("search-by-keyword")]
         public IActionResult SearchByKeyword(string keyword)
         {
-            return Ok(_service.SearchByKeyword(keyword));
+            var res = _service.SearchByKeyword(keyword);
+            if (res.Any())
+            {
+                return Ok(res);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpPut("update-image-url")]
