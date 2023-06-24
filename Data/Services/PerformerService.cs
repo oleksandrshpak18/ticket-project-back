@@ -100,5 +100,20 @@ namespace ticket_project_back.Data.Services
             }
             return ConvertToVm(_performer);
         }
+
+        public PerformerVM GetByTitle(string title)
+        {
+            if (title.IsNullOrEmpty())
+            {
+                return null;
+            }
+
+            string lowercaseKeyWord = title.ToLower();
+            var res = GetWithRelations()
+                .FirstOrDefault(x => x.Title.ToLower().Contains(title));
+                        
+
+            return ConvertToVm(res);
+        }
     }
 }

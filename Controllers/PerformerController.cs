@@ -33,6 +33,21 @@ namespace ticket_project_back.Controllers
                 return Ok(res);
             }
         }
+
+        [HttpGet("get-by-title")]
+        public IActionResult GetByTitle(string title)
+        {
+            var res = _service.GetByTitle(title);
+            if (res != null)
+            {
+                return Ok(res);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpGet("search-by-keyword")]
         public IActionResult SearchByKeyword(string keyword)
         {
