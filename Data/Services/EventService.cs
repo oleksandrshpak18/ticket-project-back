@@ -171,7 +171,7 @@ namespace ticket_project_back.Data.Services
 
         public EventVM updateDescription(int id, string newDescr)
         {
-            var _event = _context.Events.FirstOrDefault(n => n.VenueId == id);
+            var _event = _context.Events.FirstOrDefault(n => n.EventId == id);
             if (_event != null)
             {
                 _event.EventDescription = newDescr;
@@ -182,7 +182,7 @@ namespace ticket_project_back.Data.Services
 
         public EventVM updateImage(int id, string imageUrl)
         {
-            var _event = _context.Events.FirstOrDefault(n => n.VenueId == id);
+            var _event = _context.Events.FirstOrDefault(n => n.EventId == id);
             if (_event != null)
             {
                 _event.Img = imageUrl;
