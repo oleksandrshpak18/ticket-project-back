@@ -25,43 +25,55 @@ namespace ticket_project_back.Data.Services
                 Duration = ev.Duration,
                 MinAgeRestriction = ev.MinAgeRestriction,
                 Img = ev.Img,
-                EventType = ev.EventType?.EventType1,
-                Performer = new PerformerVM
-                    {
-                        PerformerId = ev.Performer.PerformerId,
-                        Title = ev.Performer.Title,
-                        Description = ev.Performer.Description,
-                        CareerBeginYear = ev.Performer.CareerBeginYear,
-                        Img = ev.Performer.Img,
-                        Country = ev.Performer.Country?.Country1,
-                        PerformerType = ev.Performer.PerformerType?.PerformerType1,
-                        PerformerGenres = ev.Performer.PerformerGenres.Select(n => n.Genre.Genre1).ToList()
-                    },
-                TicketPrices = ev.TicketPrices.Select(n => new TicketPriceVM
-                    {
-                        EventId = n.EventId,
-                        SeatType = n.VenueZone?.SeatType?.SeatType1,
-                        Price = n.Price
-                    }).ToList(),
-                Venue = new VenueVM
-                    {
-                        VenueId = ev.Venue.VenueId,
-                        VenueName = ev.Venue.VenueName,
-                        Description = ev.Venue.Description,
-                        City = ev.Venue.City?.City1,
-                        Street = ev.Venue.Street,
-                        BuildingNumber = ev.Venue.BuildingNumber,
-                        Img = ev.Venue.Img,
-                        VenueZones = ev.Venue.VenueZones
+                EventType = ev.EventType?.EventType1
+            };
+
+            if (ev.Performer != null)
+            {
+                res.Performer = new PerformerVM
+                {
+                    PerformerId = ev.Performer.PerformerId,
+                    Title = ev.Performer.Title,
+                    Description = ev.Performer.Description,
+                    CareerBeginYear = ev.Performer.CareerBeginYear,
+                    Img = ev.Performer.Img,
+                    Country = ev.Performer.Country?.Country1,
+                    PerformerType = ev.Performer.PerformerType?.PerformerType1,
+                    PerformerGenres = ev.Performer.PerformerGenres.Select(n => n.Genre.Genre1).ToList()
+                };
+            }
+
+            if(ev.TicketPrices != null)
+            {
+                res.TicketPrices = ev.TicketPrices.Select(n => new TicketPriceVM
+                {
+                    EventId = n.EventId,
+                    SeatType = n.VenueZone?.SeatType?.SeatType1,
+                    Price = n.Price
+                }).ToList();
+            }
+
+            if (ev.Venue != null)
+            {
+                res.Venue = new VenueVM
+                {
+                    VenueId = ev.Venue.VenueId,
+                    VenueName = ev.Venue.VenueName,
+                    Description = ev.Venue.Description,
+                    City = ev.Venue.City?.City1,
+                    Street = ev.Venue.Street,
+                    BuildingNumber = ev.Venue.BuildingNumber,
+                    Img = ev.Venue.Img,
+                    VenueZones = ev.Venue.VenueZones
                             .Select(n => new VenueZoneVm
                             {
                                 SeatType = n.SeatType?.SeatType1,
                                 RowsCount = n.RowsCount,
                                 SeatsPerRowCount = n.SeatsPerRowCount
                             }
-                        ).ToList(),
-                    }
-            };
+                        ).ToList()
+                };
+            }
 
             return res;
         }
@@ -150,7 +162,7 @@ namespace ticket_project_back.Data.Services
                                     }
                                 )
                        },
-                   Img = ev.Img,
+                   Img = ev.Img
                }).ToList();
         }
 
