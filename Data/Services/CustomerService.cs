@@ -35,5 +35,11 @@ namespace ticket_project_back.Data.Services
             var customer = _context.Customers.FirstOrDefault(x => x.PhoneNumber == phoneNumber);
             return (CustomerVM)customer;    
         }
+
+        public bool isPresent(CustomerVM customer)
+        {
+            return _context.Customers
+                .Any(x => x.PhoneNumber == customer.PhoneNumber && x.Email == customer.Email);
+        }
     }
 }

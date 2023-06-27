@@ -18,6 +18,8 @@ builder.Services.AddTransient<CustomerService>();
 builder.Services.AddTransient<PerformerService>();
 builder.Services.AddTransient<VenueService>();
 builder.Services.AddTransient<EventService>();
+builder.Services.AddTransient<TicketService>();
+builder.Services.AddTransient<OrderService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
