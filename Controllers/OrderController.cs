@@ -15,7 +15,7 @@ namespace ticket_project_back.Controllers
             _service = service;
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult AddNewOrder([FromBody] OrderVM order)
         {
             try

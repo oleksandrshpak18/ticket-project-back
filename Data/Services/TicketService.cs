@@ -60,6 +60,12 @@ namespace ticket_project_back.Data.Services
 
         public bool isPresent(TicketVM item)
         {
+            //if(item.EventId == null) throw new ArgumentNullException(nameof(item.EventId));
+            //if(item.SeatType == null) throw new ArgumentNullException(nameof(item.SeatType));
+            //if(item.VenueId == null) throw new ArgumentNullException(nameof(item.VenueId));
+            //if(item.RowNumber == null) throw new ArgumentNullException(nameof(item.RowNumber));
+            //if(item.SeatNumber == null) throw new ArgumentNullException(nameof(item.SeatNumber));
+
             return _context.Tickets
                 .Any(x => x.TicketPriceId == (_context.TicketPrices
                     .Where(x => x.EventId == item.EventId
