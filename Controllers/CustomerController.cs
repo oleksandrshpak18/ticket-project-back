@@ -18,7 +18,12 @@ namespace ticket_project_back.Controllers
         [HttpPost("add-customer")]
         public IActionResult AddCustomer([FromBody] CustomerVM customer)
         {
-            return Ok(_service.AddNew(customer));
+            var res = _service.AddNew(customer);
+            if (res != null)
+            {
+                return Ok(res);
+            }
+            else { return BadRequest("Not valid customer data."); }
         }
 
         [HttpGet("get-customer-by-phone")]

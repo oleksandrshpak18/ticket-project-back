@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.Text;
+using System.Text.RegularExpressions;
 using ticket_project_back.Data.Interfaces;
 using ticket_project_back.Data.Models;
 using ticket_project_back.Data.ViewModels;
@@ -13,21 +14,39 @@ namespace ticket_project_back.Data.Services
             _context = context;
         }
 
+        private bool isValid(CustomerVM customer)
+        {
+            bool res = true;
+            res &= customer != null;
+            res &= customer.Name != null && customer.Name.Length > 0 && customer.Name.Length <= 50;
+            res &= customer.Surname != null && customer.Surname.Length > 0 && customer.Surname.Length <= 50;
+            res &= customer.PhoneNumber != null && customer.PhoneNumber.Length == 12 && Regex.IsMatch(customer.PhoneNumber, @"^[0-9]{12}$");
+            res &= customer.Email != null && customer.Email.Length > 0 && customer.Email.Length <= 320 && Regex.IsMatch(customer.Email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            return res;
+        }
+
         public CustomerVM AddNew(CustomerVM item)
         {
-            var _customer = new Customer()
+            if(isValid(item))
             {
-                Name = item.Name,
-                Surname = item.Surname,
-                Email = item.Email,
-                PhoneNumber = item.PhoneNumber,
-                BirthDate = item.BirthDate,
-                CreateDate = DateTime.Now,
-                UpdateDate = DateTime.Now
-            };
-            _context.Customers.Add(_customer);
-            _context.SaveChanges();
-            return item;
+                var _customer = new Customer()
+                {
+                    Name = item.Name,
+                    Surname = item.Surname,
+                    Email = item.Email,
+                    PhoneNumber = item.PhoneNumber,
+                    BirthDate = item.BirthDate,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now
+                };
+                _context.Customers.Add(_customer);
+                _context.SaveChanges();
+                return item;
+            }else
+            {
+                return null;
+            }
+            
         }
 
         public CustomerVM getByPhone(string phoneNumber)
