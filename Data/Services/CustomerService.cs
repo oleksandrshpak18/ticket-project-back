@@ -18,8 +18,8 @@ namespace ticket_project_back.Data.Services
         {
             bool res = true;
             res &= customer != null;
-            res &= customer.Name != null && customer.Name.Length > 0 && customer.Name.Length <= 50;
-            res &= customer.Surname != null && customer.Surname.Length > 0 && customer.Surname.Length <= 50;
+            res &= customer.Name != null && customer.Name.Length > 0 && customer.Name.Length <= 50 && Regex.IsMatch(customer.Name, @"^[^0-9]*$");
+            res &= customer.Surname != null && customer.Surname.Length > 0 && customer.Surname.Length <= 50 && Regex.IsMatch(customer.Surname, @"^[^0-9]*$");
             res &= customer.PhoneNumber != null && customer.PhoneNumber.Length == 12 && Regex.IsMatch(customer.PhoneNumber, @"^[0-9]{12}$");
             res &= customer.Email != null && customer.Email.Length > 0 && customer.Email.Length <= 320 && Regex.IsMatch(customer.Email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
             return res;
@@ -31,10 +31,10 @@ namespace ticket_project_back.Data.Services
             {
                 var _customer = new Customer()
                 {
-                    Name = item.Name,
-                    Surname = item.Surname,
-                    Email = item.Email,
-                    PhoneNumber = item.PhoneNumber,
+                    Name = item.Name.Trim(),
+                    Surname = item.Surname.Trim(),
+                    Email = item.Email.Trim(),
+                    PhoneNumber = item.PhoneNumber.Trim(),
                     BirthDate = item.BirthDate,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now
